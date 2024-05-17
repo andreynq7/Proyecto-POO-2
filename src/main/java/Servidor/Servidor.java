@@ -5,6 +5,7 @@
 package Servidor;
 
 import Modelos.Mensaje;
+import cazadeltesoro.Casilla;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
@@ -64,7 +65,18 @@ public class Servidor {
         }
     }
     
-    
+    //enviarCasilla
+    public void SendCasilla(Casilla casilla){
+        for(ThreadServidor tsDelCliente : clientesConectados){
+            try{
+                if(!casilla.isTieneAmenaza()){
+                    tsDelCliente.salida.writeObject(PORT);
+                }
+            }catch(IOException ex){
+                //Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
     
     
     
